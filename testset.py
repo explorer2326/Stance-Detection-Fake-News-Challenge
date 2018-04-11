@@ -1,11 +1,11 @@
 from csv import DictReader
 import generate_test_splits
 
-class DataSet():
-    def __init__(self, name="train", path="fnc-1"):
+class TestSet():
+    def __init__(self, name="competition_test", path="fnc-1"):
         self.path = path
 
-        #print("Reading dataset")
+        print("Reading testset")
         bodies = name+"_bodies.csv"
         stances = name+"_stances.csv"
 
@@ -35,6 +35,3 @@ class DataSet():
             for line in r:
                 rows.append(line)
         return rows
-
-#dataset = DataSet()
-#print(dataset.articles[0])

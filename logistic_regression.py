@@ -42,7 +42,7 @@ def load_data():
             train_y.append(float(1))
     return mat(train_x), mat(train_y).transpose() 
 #%%
-# train a logistic regression model using smooth stochastic gradient descent 
+# train a logistic regression model using gradient descent 
 def train_logistic_classifier(train_x, train_y,class_name):  
     # calculate training time  
     startTime = time.time()  
@@ -52,16 +52,15 @@ def train_logistic_classifier(train_x, train_y,class_name):
     alpha = 0.01
     max_iteration = 100  
     weights[class_name] = ones((feature_size, 1))  
+    ''' standard gradient descent
     for k in range(max_iteration):  
         for i in range(sample_size):  
             output = sigmoid(train_x[i, :] * weights[class_name]) 
             error = train_y[i, 0] - output  
             weights[class_name] = weights[class_name] + alpha * train_x[i, :].transpose() * error 
-    
     '''
-    # optimize through gradient descent algorilthm  
-    for k in range(max_iteration):  
-        
+    #improved gradient descent (smooth stochastic gradient descent)
+    for k in range(max_iteration):          
         # randomly select samples to optimize for reducing cycle fluctuations   
         dataIndex = list(range(sample_size))  
         for i in list(range(sample_size)):  
@@ -71,7 +70,7 @@ def train_logistic_classifier(train_x, train_y,class_name):
             error = train_y[randIndex, 0] - output  
             weights[class_name] = weights[class_name] + alpha * train_x[randIndex, :].transpose() * error  
             del(dataIndex[randIndex]) # during one interation, delete the optimized sample   
-    '''
+    
     print ('Training took %fs!' % (time.time() - startTime))  
     return weights[class_name]  
 #%%  

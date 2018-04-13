@@ -28,25 +28,6 @@ for ID in dataset.articles:
     
     corpus.append(filtered_sentence)
     
-'''  not used
-#load article headline into corpus
-for s in dataset.stances:
-    # raw data loading
-    raw_headlines = s['Headline']
-    # tokenization
-    headline_tokens = word_tokenize(raw_headlines)
-    #stop words removal
-    stop_words = set(stopwords.words('english'))
-    filtered_headline = [w for w in headline_tokens if not w in stop_words]
-    #stemming
-    ps = PorterStemmer()
-    stemmed_headlines =[]
-    for w in filtered_headline:    
-        stemmed_headlines.append(ps.stem(w))
-    
-    corpus.append(stemmed_headlines)
-    
-'''
 # train word2vec
 
 model = gensim.models.Word2Vec(corpus, size=100, window=5, min_count=10, workers=4)

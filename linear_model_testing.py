@@ -121,6 +121,6 @@ print(accuracy2)
 overall_accuracy = (len(unrelated_articles_index)*accuracy1 + len(relevant_articles_index)*accuracy2)/(len(unrelated_articles_index)+len(relevant_articles_index))
 print('overall accuracy:')
 print(overall_accuracy)
-weighted_score = accuracy1*25 + accuracy2*75
+weighted_score = (accuracy1*25413*25 + accuracy2*(25413-len(unrelated_articles_index))*75)/(25413*25+7064*75)
 print('weighted score:')
 print(weighted_score)
